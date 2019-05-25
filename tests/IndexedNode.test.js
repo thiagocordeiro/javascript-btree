@@ -86,17 +86,17 @@ describe('IndexedNode', () => {
 
     it('When given an index and it has node on right Then replace by right node', () => {
         let node = new IndexedNode(10)
-            .insert(10, 'A')
-            .insert(30, 'B')
-            .insert(12, 'C')
-            .insert(11, 'D')
-            .insert(13, 'E')
-            .insert(14, 'F')
-            .insert(22, 'G')
-            .insert(21, 'H')
-            .insert(26, 'I')
-            .insert(19, 'J')
-            .insert(28, 'K')
+            .insert(10)
+            .insert(30)
+            .insert(12)
+            .insert(11)
+            .insert(13)
+            .insert(14)
+            .insert(22)
+            .insert(21)
+            .insert(26)
+            .insert(19)
+            .insert(28)
         ;
 
         node.delete(22);
@@ -106,15 +106,15 @@ describe('IndexedNode', () => {
 
     it('When given an index and it has no right node but has on left Then replace by left node', () => {
         let node = new IndexedNode(10)
-            .insert(10, 'A')
-            .insert(30, 'B')
-            .insert(12, 'C')
-            .insert(11, 'D')
-            .insert(13, 'E')
-            .insert(14, 'F')
-            .insert(22, 'G')
-            .insert(21, 'H')
-            .insert(19, 'J')
+            .insert(10)
+            .insert(30)
+            .insert(12)
+            .insert(11)
+            .insert(13)
+            .insert(14)
+            .insert(22)
+            .insert(21)
+            .insert(19)
         ;
 
         node.delete(22);
@@ -124,20 +124,47 @@ describe('IndexedNode', () => {
 
     it('When given an index and it no children Then set to null on its parent', () => {
         let node = new IndexedNode(10)
-            .insert(10, 'A')
-            .insert(30, 'B')
-            .insert(12, 'C')
-            .insert(11, 'D')
-            .insert(13, 'E')
-            .insert(14, 'F')
-            .insert(22, 'G')
-            .insert(21, 'H')
-            .insert(19, 'J')
+            .insert(10)
+            .insert(30)
+            .insert(12)
+            .insert(11)
+            .insert(13)
+            .insert(14)
+            .insert(22)
+            .insert(21)
+            .insert(19)
         ;
 
         node.delete(19);
-
         parent = node.search(21);
+
         expect(parent.left || parent.right).toBeUndefined();
+    });
+
+    it('When given tree Then sort nodes by its indexe', () => {
+        let node = new IndexedNode(10)
+            .insert(10)
+            .insert(30)
+            .insert(12)
+            .insert(11)
+            .insert(13)
+            .insert(14)
+            .insert(22)
+            .insert(21)
+            .insert(19)
+            .insert(1)
+            .insert(4)
+            .insert(22)
+            .insert(9)
+            .insert(100)
+        ;
+
+        const values = node.sort().map((node) => node.index);
+
+        expect(
+            JSON.stringify(values)
+        ).toBe(
+            JSON.stringify([1, 4, 9, 10, 10, 11, 12, 13, 14, 19, 21, 22, 22, 30, 100])
+        );
     });
 });

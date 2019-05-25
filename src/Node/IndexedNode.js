@@ -7,7 +7,7 @@ export class IndexedNode {
     }
 
     insert(index, data) {
-        index < this.index ? this._insertOnLeft(index, data) : this._insertOnRight(index, data)
+        index < this.index ? this._insertOnLeft(index, data) : this._insertOnRight(index, data);
 
         return this;
     }
@@ -106,5 +106,21 @@ export class IndexedNode {
         }
 
         this.right = null;
+    }
+
+    sort() {
+        let sorted = [];
+
+        if (this.left) {
+            sorted.push(...this.left.sort())
+        }
+
+        sorted.push(...[this]);
+
+        if (this.right) {
+            sorted.push(...this.right.sort())
+        }
+
+        return sorted;
     }
 }
