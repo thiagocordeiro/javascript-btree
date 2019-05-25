@@ -1,0 +1,13 @@
+{
+  "name": "binary-tree",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/preset-env": "^7.4.5",
+    "jest": "^24.8.0"
+  },
+  "scripts": {
+    "tests": "jest --verbose"
+  }
+}
